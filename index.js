@@ -4,6 +4,7 @@ const { Toolkit } = require('actions-toolkit')
 Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:issue_comment')
   const { owner, repo, issue_number } = tools.context.issue;
+  tools.log.debug('payload >>>>>>>>>>>>', tools.context.payload);
   tools.github.issues
     .createComment({
       owner,
