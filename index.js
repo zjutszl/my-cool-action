@@ -6,20 +6,21 @@ Toolkit.run(async tools => {
   const { owner, repo, issue_number } = tools.context.issue;
   tools.log.debug('tools.context.ref >>> ', tools.context.ref);
   tools.log.debug('payload >>>>>>>>>>>> ', tools.context.payload);
-  tools.log.debug('tools.context >>> ', tools.context);
-  // tools.github.issues
-  //   .createComment({
-  //     owner,
-  //     repo,
-  //     issue_number,
-  //     body: tools.context.payload.comment.body,
-  //   })
-  //   .then(() => {
-  //     tools.exit.success('Comment repeated')
-  //   })
-  //   .catch(() => {
-  //     tools.exit.failure('Something went wrong')
-  //   })
+  if (tools.context.event === 'issue_comment' && tools.context.action === 'created') {
+    tools.github.issues
+      .createComment({
+        owner,
+        repo,
+        issue_number,
+        body: tools.context.payload.comment.body,
+      })
+      .then(() => {
+        tools.exit.success('Comment repeated')
+      })
+      .catch(() => {
+        tools.exit.failure('Something went wrong')
+      })
+  }
 })
 
 // Toolkit.run(async tools => {
