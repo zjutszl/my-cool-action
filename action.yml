@@ -1,0 +1,8 @@
+name: delete merged branch
+description: This action delete merged branch automatically
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: git-branch
+  color: white
