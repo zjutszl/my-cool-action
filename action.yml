@@ -1,4 +1,4 @@
-name: delete merged branch
+name: delete-merged-branch-asdf
 description: This action delete merged branch automatically
 runs:
   using: docker

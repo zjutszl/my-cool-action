@@ -11,7 +11,7 @@
 FROM node:slim
 
 # Labels for GitHub to read your action
-LABEL "com.github.actions.name"="delete merged branch"
+LABEL "com.github.actions.name"="delete-merged-branch-asdf"
 LABEL "com.github.actions.description"="This action delete merged branch automatically"
 # Here are all of the available icons: https://feathericons.com/
 LABEL "com.github.actions.icon"="git-branch"

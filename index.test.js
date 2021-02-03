@@ -1,6 +1,6 @@
 const { Toolkit } = require('actions-toolkit')
 
-describe('delete merged branch', () => {
+describe('delete-merged-branch-asdf', () => {
   let action, tools
 
   // Mock Toolkit.run to define `action` so we can call it
