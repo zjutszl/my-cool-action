@@ -31,4 +31,4 @@ Toolkit.run(async tools => {
       tools.exit.success('Comment repeated')
     })
   tools.exit.failure('Something went wrong')
-}, { event: 'issue_comment' })
+}, { event: 'issue_comment.created' })
