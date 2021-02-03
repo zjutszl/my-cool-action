@@ -6,17 +6,15 @@ Toolkit.run(async tools => {
   tools.log.debug('tools.context.ref >>> ', tools.context.ref);
   tools.log.debug('payload >>>>>>>>>>>> ', tools.context.payload);
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
-    tools.github.issues
-      .createComment({
+    try {
+      await tools.github.issues.createComment({
         ...tools.context.issue,
         body: "test",
       })
-      .then(() => {
-        tools.exit.success('Comment repeated')
-      })
-      .catch(() => {
-        tools.exit.failure('Something went wrong')
-      })
+      tools.exit.success('success')
+    } catch (e) {
+      tools.exit.failure('failed')
+    }
   }
 })
 
