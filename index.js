@@ -18,7 +18,7 @@ Toolkit.run(async tools => {
     .catch(() => {
       tools.exit.failure('Something went wrong')
     })
-}, { event: 'issue_comment.created' })
+}, { event: ['issue_comment.created', 'issue_comment.edited'] })
 
 Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:pull_request.closed')
