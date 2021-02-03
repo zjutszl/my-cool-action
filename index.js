@@ -4,13 +4,14 @@ const { Toolkit } = require('actions-toolkit')
 Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:issue_comment')
   const { owner, repo, issue_number } = tools.context.issue;
+  console.log('tools.context.issue >>> ', tools.context.issue);
   tools.log.debug('payload >>>>>>>>>>>>', tools.context.payload);
   tools.github.issues
     .createComment({
       owner,
       repo,
       issue_number,
-      body: 'repeat:\n' + tools.context.payload.comment.body,
+      body: tools.context.payload.comment.body,
     })
     .then(() => {
       tools.exit.success('Comment repeated')
@@ -18,7 +19,7 @@ Toolkit.run(async tools => {
     .catch(() => {
       tools.exit.failure('Something went wrong')
     })
-}, { event: ['issue_comment.created'] })
+}, { event: ['issue_comment'] })
 
 Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:pull_request.closed')
