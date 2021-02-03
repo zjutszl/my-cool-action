@@ -10,12 +10,14 @@ Toolkit.run(async tools => {
       owner,
       repo,
       issue_number,
-      body: 'repeat:\n' + tools.context.payload.issue.body,
+      body: 'repeat:\n' + tools.context.payload.comment.body,
     })
     .then(() => {
       tools.exit.success('Comment repeated')
     })
-  tools.exit.failure('Something went wrong')
+    .catch(() => {
+      tools.exit.failure('Something went wrong')
+    })
 }, { event: 'issue_comment.created' })
 
 Toolkit.run(async tools => {
