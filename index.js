@@ -3,16 +3,13 @@ const { Toolkit } = require('actions-toolkit')
 // Run your GitHub Action!
 Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:issue_comment')
-  const { owner, repo, issue_number } = tools.context.issue;
   tools.log.debug('tools.context.ref >>> ', tools.context.ref);
   tools.log.debug('payload >>>>>>>>>>>> ', tools.context.payload);
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
     tools.github.issues
       .createComment({
-        owner,
-        repo,
-        issue_number,
-        body: tools.context.payload.comment.body,
+        ...tools.context.issue,
+        body: "test",
       })
       .then(() => {
         tools.exit.success('Comment repeated')
