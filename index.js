@@ -6,9 +6,7 @@ Toolkit.run(async tools => {
   const { owner, repo, issue_number } = tools.context.issue;
   tools.log.debug('tools.context.ref >>> ', tools.context.ref);
   tools.log.debug('payload >>>>>>>>>>>> ', tools.context.payload);
-  tools.log.debug('tools.context.event', tools.context.event);
-  tools.log.debug('tools.context.action', tools.context.action);
-  if (tools.context.event === 'issue_comment' && tools.context.action === 'created') {
+  if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
     tools.github.issues
       .createComment({
         owner,
