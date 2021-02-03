@@ -7,12 +7,6 @@ Toolkit.run(async tools => {
   tools.log.debug('payload >>>>>>>>>>>> ', tools.context.payload);
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
     try {
-      const { data: comment } = await octokit.issues.createComment({
-        owner: repo[0],
-        repo: repo[1],
-        issue_number: inputs.issueNumber,
-        body: inputs.body,
-      });
       const params = {
         ...tools.context.issue,
         body: "test",
