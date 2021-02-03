@@ -2,6 +2,22 @@ const { Toolkit } = require('actions-toolkit')
 
 // Run your GitHub Action!
 Toolkit.run(async tools => {
+  tools.log.debug('This is triggered by event:issue_comment')
+  const { owner, repo, issue_number } = tools.context.issue;
+  tools.github.issues
+    .createComment({
+      owner,
+      repo,
+      issue_number,
+      body: 'repeat:\n' + tools.context.payload.issue.body,
+    })
+    .then(() => {
+      tools.exit.success('Comment repeated')
+    })
+  tools.exit.failure('Something went wrong')
+}, { event: 'issue_comment.created' })
+
+Toolkit.run(async tools => {
   tools.log.debug('This is triggered by event:pull_request.closed')
   const { owner, repo, pull_number } = tools.context.pullRequest;
   tools.log.debug('payload >>>>>>>>>>>>', tools.context.payload);
@@ -17,18 +33,4 @@ Toolkit.run(async tools => {
   tools.exit.failure('Something went wrong')
 }, { event: 'pull_request.closed' })
 
-Toolkit.run(async tools => {
-  tools.log.debug('This is triggered by event:issue_comment')
-  const { owner, repo, issue_number } = tools.context.issue;
-  tools.github.issues
-    .createComment({
-      owner,
-      repo,
-      issue_number,
-      body: 'repeat:\n' + tools.context.payload.issue.body,
-    })
-    .then(() => {
-      tools.exit.success('Comment repeated')
-    })
-  tools.exit.failure('Something went wrong')
-}, { event: 'issue_comment.created' })
+
