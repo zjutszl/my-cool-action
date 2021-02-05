@@ -4,13 +4,13 @@ const { Toolkit } = require('actions-toolkit');
 // Run your GitHub Action!
 Toolkit.run(async tools => {
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
-    const client = new github.GitHub(process.env.GITHUB_TOKEN);
+    const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
     const params = {
       ...tools.context.issue,
       body: "test",
     }
     tools.log.debug('params', params);
-    await client.issues.createComment(params)
+    await octokit.issues.createComment(params)
     // await tools.github.issues.createComment(params);
     tools.exit.success('success')
   }
