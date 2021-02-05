@@ -4,7 +4,7 @@ const github = require('@actions/github')
 // Run your GitHub Action!
 Toolkit.run(async tools => {
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
-    const client = new github.GitHub(token);
+    const client = new github.GitHub(process.env.GITHUB_TOKEN);
     const params = {
       ...tools.context.issue,
       body: "test",
