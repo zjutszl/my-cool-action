@@ -7,7 +7,7 @@ Toolkit.run(async tools => {
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
     const params = {
       ...tools.context.issue,
-      body: 'test222',
+      body: tools.context.payload.comment.body,
     }
     tools.log.debug('params', params);
     await tools.github.issues.createComment(params);
