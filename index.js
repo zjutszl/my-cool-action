@@ -1,5 +1,5 @@
 const { Toolkit } = require('actions-toolkit')
-const github = require('@actions/github')
+import * as github from '@actions/github'
 
 // Run your GitHub Action!
 Toolkit.run(async tools => {
