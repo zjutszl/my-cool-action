@@ -4,7 +4,6 @@ const { Toolkit } = require('actions-toolkit');
 Toolkit.run(async tools => {
   tools.log.debug('tools.context.payload >>> \n', tools.context.payload);
   if (tools.context.event === 'issue_comment' && tools.context.payload.action === 'created') {
-    tools.log.debug('params', params);
     await tools.github.issues.createComment({
       ...tools.context.issue,
       body: "comment received!!",
